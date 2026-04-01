@@ -1,6 +1,6 @@
 const fmt = (n) =>
     new Intl.NumberFormat("en-SG", { style: "currency", currency: "SGD" }).format(n);
-console.log(fmt(0));
+// console.log(fmt(0));
   
   export default function SummaryCards({ balance, income, expenses }) {
     return (

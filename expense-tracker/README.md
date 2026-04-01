@@ -1,16 +1,71 @@
-# React + Vite
+# Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and simple personal finance tracker built with React. Log your income and expenses, view your balance at a glance, and visualize your spending with a chart.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Add income and expense transactions with a description, amount, and category
+- View total balance, total income, and total expenses in summary cards
+- Spending breakdown chart powered by Chart.js
+- Transaction history with the ability to delete entries
+- Data persists in the browser via localStorage — no backend required
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Chart.js](https://www.chartjs.org/)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/expense-tracker.git
+
+# Navigate into the project folder
+cd expense-tracker
+
+# Install dependencies
+npm install
+```
+
+### Running Locally
+
+```bash
+npm run dev
+```
+
+Open your browser and go to `http://localhost:5173`.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The output will be in the `dist/` folder.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── SpendingChart.jsx    # Doughnut/bar chart of spending by category
+│   ├── SummaryCards.jsx     # Balance, income, and expense cards
+│   ├── TransactionForm.jsx  # Form to add new transactions
+│   └── TransactionList.jsx  # List of all transactions with delete option
+├── App.jsx                  # Root component and state management
+└── main.jsx                 # App entry point
+```
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).

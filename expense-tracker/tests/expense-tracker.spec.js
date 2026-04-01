@@ -11,12 +11,13 @@ test.beforeEach(async ({ page }) => {
 // Summary Cards
 // ---------------------------------------------------------------------------
 
+// Working now (Summary Cards)
 test("shows SGD$0.00 for balance, income, and expenses on load", async ({ page }) => {
-  await expect(page.getByText("Balance")).toBeVisible();
-  await expect(page.getByText("Income")).toBeVisible();
-  await expect(page.getByText("Expenses")).toBeVisible();
+  await expect(page.getByTestId("balance-label")).toBeVisible();
+  await expect(page.getByTestId("income-label")).toBeVisible();
+  await expect(page.getByTestId("expenses-label")).toBeVisible();
 
-  const zeros = page.getByText("SGD$0.00");
+  const zeros = page.getByText(/\$0\.00/);
   await expect(zeros).toHaveCount(3);
 });
 

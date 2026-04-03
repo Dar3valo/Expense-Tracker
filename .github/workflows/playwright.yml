@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main ]
 
-# Required for GitHub Pages deployment
+# Required for GitHub Pages deployments
 permissions:
   contents: read
   pages: write

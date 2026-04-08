@@ -27,6 +27,10 @@ export default function App() {
     setTransactions((prev) => prev.filter((t) => t.id !== id));
   };
 
+  const deleteAllTransactions = () => {
+    setTransactions([]);
+  };
+
   const income = transactions
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
@@ -53,6 +57,7 @@ export default function App() {
         <TransactionList
           transactions={transactions}
           onDelete={deleteTransaction}
+          onDeleteAll={deleteAllTransactions}
         />
       </div>
     </div>

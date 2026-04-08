@@ -4,7 +4,7 @@ const fmt = (n) =>
   const fmtDate = (d) =>
     new Date(d).toLocaleDateString("en-SG", { day: "numeric", month: "short", year: "numeric" });
   
-  export default function TransactionList({ transactions, onDelete }) {
+  export default function TransactionList({ transactions, onDelete, onDeleteAll }) {
     if (transactions.length === 0) {
       return (
         <div className="bg-white rounded-xl border border-gray-100 p-8 text-center text-sm text-gray-300">
@@ -17,6 +17,14 @@ const fmt = (n) =>
       <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
         <div className="px-5 py-4 border-b border-gray-50">
           <h2 className="text-sm font-semibold text-gray-700">Transactions</h2>
+          {transactions.length > 0 && (
+            <button
+              onClick={onDeleteAll}
+              className="text-xs text-white bg-red-400 hover:bg-red-500 px-3 py-1 rounded-lg transition-colors"
+            >
+              Delete all <span>🗑</span> 
+            </button>
+          )}
         </div>
         <ul>
           {transactions.map((t, i) => (

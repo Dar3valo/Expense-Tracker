@@ -4,21 +4,33 @@ const CATEGORIES = ["Food", "Transport", "Housing", "Entertainment", "Health", "
 
 const EMPTY = { description: "", amount: "", type: "expense", category: "Food", date: new Date().toISOString().split("T")[0] };
 
+const sanitize = (str) => str.replace(/[<>]/g, "");
+
 export default function TransactionForm({ onAdd }) {
   const [form, setForm] = useState(EMPTY);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const value = e.target.name === "description"
+      ? sanitize(e.target.value)
+      : e.target.value;
+    setForm((prev) => ({ ...prev, [e.target.name]: value }));
     setError("");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.description.trim()) return setError("Please add a description.");
+  
+    const desc = form.description.trim();
+    if (!desc) return setError("Please add a description.");
+    if (desc.length > 100) return setError("Description is too long.");         // cap length
+    if (!CATEGORIES.includes(form.category)) return setError("Invalid category."); // whitelist check
     if (!form.amount || isNaN(form.amount) || Number(form.amount) <= 0)
       return setError("Please enter a valid amount.");
-
+    if (Number(form.amount) > 1_000_000) return setError("Amount seems too large."); // sanity cap
+    if (!form.date || isNaN(new Date(form.date).getTime()))
+      return setError("Please enter a valid date.");                              // validate date
+  
     onAdd({ ...form, amount: parseFloat(form.amount) });
     setForm(EMPTY);
   };
@@ -50,6 +62,7 @@ export default function TransactionForm({ onAdd }) {
 
         <input
           name="description"
+          maxLength="100"
           placeholder="Description"
           value={form.description}
           onChange={handleChange}

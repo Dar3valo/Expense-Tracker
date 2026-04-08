@@ -171,3 +171,19 @@ test("persists transactions after a page reload", async ({ page }) => {
   await expect(page.getByText("Rent")).toBeVisible();
   await expect(page.getByText(/-\$1,200\.00/)).toBeVisible();
 });
+
+// ---------------------------------------------------------------------------
+// Deleting all transactions
+// ---------------------------------------------------------------------------
+
+//Working test 15
+test("deletes all transactions when the Delete all button is clicked", async ({ page }) => {
+  await page.getByPlaceholder("Description").fill("Test expense");
+  await page.getByPlaceholder("Amount (SGD)").fill("20");
+  await page.getByRole("button", { name: "Add" }).click();
+
+  await page.getByRole("button", { name: "Delete all" }).click();
+
+  await expect(page.getByText("Test expense")).not.toBeVisible();
+  await expect(page.getByText("No transactions yet. Add one above.")).toBeVisible();
+});
